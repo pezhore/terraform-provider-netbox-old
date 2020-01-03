@@ -1,7 +1,7 @@
 package netbox
 
 import (
-	"fmt"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourceIPAddress() *schema.Resource {
@@ -13,15 +13,15 @@ func resourceIPAddress() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"input": &schema.Schema{
-				Type:    schema.TypeString,
-				Requred: true,
+				Type:     schema.TypeString,
+				Required: true,
 			},
 		},
 	}
 }
 
 func resourceIPAddressCreate(d *schema.ResourceData, m interface{}) error {
-	d.SetId(d.Get("input"))
+	d.SetId(d.Get("input").(string))
 	return resourceIPAddressRead(d, m)
 }
 
