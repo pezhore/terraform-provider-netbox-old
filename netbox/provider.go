@@ -2,11 +2,12 @@ package netbox
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
 // Provider returns a schema.Provider for Netbox
-func Provider() *schema.Provider {
-	return &schema.Provider{
+func Provider() terraform.ResourceProvider {
+	provider := &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"api_key": {
 				Type:        schema.TypeString,
@@ -33,6 +34,8 @@ func Provider() *schema.Provider {
 			"netbox_ip_address": resourceIPAddress(),
 		},
 	}
+
+	return provider
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
